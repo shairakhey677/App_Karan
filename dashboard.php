@@ -65,8 +65,8 @@
     <script>
         function logout() {
             console.log("Berhasil logout");
-            window.location.href = "login.html";
-            history.pushState(null, null, "login.html");
+            window.location.href = "index.php";
+            history.pushState(null, null, "index.php");
         }
     </script>
 
