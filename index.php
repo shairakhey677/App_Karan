@@ -22,6 +22,7 @@
                                     class="form-control"
                                     type="text"
                                     id="username"
+                                    name="username"
                                     placeholder="Username"
                                     autofocus
                                     autocomplete="off">
@@ -29,6 +30,7 @@
                                     class="form-control mt-3"
                                     type="password"
                                     id="password"
+                                    name="password"
                                     placeholder="Password"
                                     autofocus
                                     autocomplete="off">
