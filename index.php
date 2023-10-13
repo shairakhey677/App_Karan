@@ -14,7 +14,7 @@
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
                         <div   div class="row">
-                            <form action="" id="loginForm">
+                            <form action="actionLogin.php" id="loginForm">
                                 <div class="card-header mb-3">
                                     <strong>Login</strong>
                                 </div>
@@ -34,7 +34,7 @@
                                     placeholder="Password"
                                     autofocus
                                     autocomplete="off">
-                                <button type="button" class="btn btn-primary mt-3" onclick="login()"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+                                <button type="button" class="btn btn-primary mt-3"><i class="bi bi-box-arrow-in-right"></i> Login</button>
                                 <a href="#" class="btn btn-outline-secondary mt-3" onclick="switchForms('registerForm')">Register</a>
                             </form>
                         <form action="registrasi.php" method="post" id="registerForm" style="display: none;">
