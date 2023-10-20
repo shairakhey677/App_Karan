@@ -6,6 +6,16 @@
     <title>Welcome</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+     body {
+        background-image: url('https://source.unsplash.com/1200x250/?school');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+  </style>
+
+
   </head>
   <body>
     <div class="container">
@@ -15,52 +25,97 @@
                   <div class="card-header mb-3">
                     <strong>Aplikasi PeSaT - Pencatatan Siswa Terlambat</strong>
                   </div>
-                  <div class="card-body">
-                    <button type="button" class="btn btn-danger float-right" onclick="logout()">Logout</button>
-                    <button type="button" class="btn btn-primary float-right" id="tambahBaris">Tambah Data</button>
-                    <table class="table" id="tabelData">
-                      <thead>
-                          <tr>
-                              <th>Nama Siswa</th>
-                              <th>Kelas</th>
-                              <th>Keterangan</th>
-                              <th>Aksi</th>
-                          </tr>
-                      </thead>
-                      <tbody id="tabelBody">
-                      <tr>
+                  <form name="kirim_data">
+                    <div class="card-body">
+                      <!-- alert -->
+                      <div class="alert alert-success alert-dismissible fade show alert-berhasil d-none" role="alert">
+                        <strong>Kirim data berhasil!</strong> Data sudah masuk ke dalam database aplikasi Pesat..
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <button type="button" class="btn btn-danger float-right" onclick="logout()">Logout</button>
+                      <button type="button" class="btn btn-primary float-right" id="tambahBaris">Tambah Data</button>
+                      <table class="table" id="tabelData">
+                        <thead>
+                            <tr>
+                                <th>Jam Terlambat</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Keterangan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelBody">
+                        <tr>
                           <td>
-                            <select class="form-control pilihan" name="kelas">
-                              <option value="">Pilih Kelas</option>
-                              <option value="X PPLG">X PPLG</option>
-                              <option value="X DKV">X DKV</option>
-                              <option value="X TJKT 1">X TJKT 1</option>
-                              <option value="X TJKT 2">X TJKT 2</option>
-                            </select>
+                            <input type="datetime-local" class="form-control" id="birthdaytime" name="jam_terlambat">
                           </td>
-                          <td>                   
-                            <input type="text" name="nama" class="form-control" placeholder="Nama Siswa">
-                          </td>
-                          <td>
-                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                              <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" checked>
-                              <label class="btn btn-outline-primary" for="btncheck1">Terlambat</label>
-                            </div>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-danger btn-remove"><i class="bi bi-trash-fill"></i></button>
-                          </td>
-                      </tr>
-                          <!-- Tambahkan baris sebanyak yang Anda perlukan -->
-                      </tbody>
-                    </table>
-                  </div>
-                <button type="submit" class="btn btn-success text-center">Kirim data</button>
+                            <td>
+                              <select class="form-control pilihan" name="kelas">
+                                <option value="">Pilih Kelas</option>
+                                <option value="X PPLG">X PPLG</option>
+                                <option value="X DKV">X DKV</option>
+                                <option value="X TJKT 1">X TJKT 1</option>
+                                <option value="X TJKT 2">X TJKT 2</option>
+                              </select>
+                            </td>
+                            <td>                   
+                              <input type="text" name="nama" class="form-control" placeholder="Nama Siswa">
+                            </td>
+                            <td>
+                              <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                <input type="checkbox" class="btn-check" name="status" value="Terlambat" id="btncheck1" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="btncheck1">Terlambat</label>
+                              </div>
+                            </td>
+                            <td>
+                              <a href="" class="btn btn-danger btn-remove"><span class="badge rounded-pill text-bg-danger"><i class="bi bi-trash-fill"></i></span></a>
+                            </td>
+                        </tr>
+                            <!-- Tambahkan baris sebanyak yang Anda perlukan -->
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="p-3">
+                        <button type="submit" class="btn btn-success btn-kirim">Kirim data</button>
+                        <button class="btn btn-success btn-loading d-none" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span role="status">Loading...</span>
+                      </button>
+                    </div>
+                  </form>
             </div>
           </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <!-- proses kirim data ke database -->
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbw4Oq6uhJhUN0I8Te_fg0k7ONNp8LBeYBN6FAA2-zjbwH_dJUAr9frXYuR0C5tIj4lcBg/exec'
+      const form = document.forms['kirim_data']
+      const btnLoading = document.querySelector('.btn-loading');
+      const btnKirim = document.querySelector('.btn-kirim');
+      const alertBerhasil = document.querySelector('.alert-berhasil');
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        btnLoading.classList.toggle('d-none');
+        btnKirim.classList.toggle('d-none');
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+
+            alertBerhasil.classList.toggle('d-none');
+            form.reset();
+
+            console.log('Success!', response);
+          })
+          .catch(error => console.error('Error!', error.message))
+      });
+    </script>
 
     <script>
         function logout() {
@@ -74,10 +129,13 @@
       document.getElementById('tambahBaris').addEventListener('click', function() {
         var tbody = document.getElementById('tabelBody');
         var newRow = document.createElement('tr');
+        var rowCount = tbody.getElementsByTagName('tr').length + 1; // Menghitung jumlah baris
     
         newRow.innerHTML = `
+        <td>                   
+          <input type="datetime-local" class="form-control" id="birthdaytime" name="jam_terlambat_${rowCount}">
         <td>
-          <select class="form-control" id="pilihan" name="kelas">
+          <select class="form-control" id="pilihan" name="kelas_${rowCount}">
             <option value="">Pilih Kelas</option>
             <option value="X PPLG">X PPLG</option>
             <option value="X DKV">X DKV</option>
@@ -85,7 +143,7 @@
             <option value="X TJKT 2">X TJKT 2</option>
           </select>
         <td>
-            <input type="text" class="form-control" placeholder="Nama Siswa">
+            <input type="text" class="form-control" name="nama_${rowCount}" placeholder="Nama Siswa">
         </td>
         <td>
             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
@@ -94,7 +152,7 @@
             </div>
         </td>
         <td>
-          <button type="button" class="btn btn-danger btn-remove"><i class="bi bi-trash-fill"></i></button>
+          <a href="" class="btn btn-danger btn-remove"><span class="badge rounded-pill text-bg-danger"><i class="bi bi-trash-fill"></i></span></a>
         </td>
         `;
     
