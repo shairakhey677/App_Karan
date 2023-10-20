@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `atm_web`
 --
-CREATE DATABASE IF NOT EXISTS `atm_web` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS D`atm_web` EFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `atm_web`;
 
 -- --------------------------------------------------------
