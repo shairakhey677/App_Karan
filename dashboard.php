@@ -38,8 +38,8 @@
                         <thead>
                             <tr>
                                 <th>Jam Terlambat</th>
-                                <th>Nama Siswa</th>
                                 <th>Kelas</th>
+                                <th>Nama Siswa</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
@@ -91,7 +91,7 @@
 
     <!-- proses kirim data ke database -->
     <script>
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbw4Oq6uhJhUN0I8Te_fg0k7ONNp8LBeYBN6FAA2-zjbwH_dJUAr9frXYuR0C5tIj4lcBg/exec'
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxdDTEW7k8O0Hme7kWosdMFyR2l0UlF8OeLgB2sN0dB5sVO1gZibH7TnvQAodQ1tx18/exec'
       const form = document.forms['kirim_data']
       const btnLoading = document.querySelector('.btn-loading');
       const btnKirim = document.querySelector('.btn-kirim');
